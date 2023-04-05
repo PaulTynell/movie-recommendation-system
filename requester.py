@@ -2,6 +2,7 @@
 # Author: Heikki Jarvinen
 # Description: class used to request data from movie database
 
+# pip install requests
 import requests
 
 
