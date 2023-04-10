@@ -1,0 +1,3 @@
+Paul,25,male,horror
+Risto,15,male,comedy
+Annika,32,female,romantic
