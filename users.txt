@@ -1,3 +1,2 @@
-Paul,25,male,horror
-Risto,15,male,comedy
-Annika,32,female,romantic
+paul,34,male,horror
+ff,23,fa,hooro
