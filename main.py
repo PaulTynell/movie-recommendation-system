@@ -6,7 +6,8 @@ def main():
 
     api = requester.Requester()
 
-    api.get_trending("movie", "day")
+    trending_tv = api.get_trending("tv", "week")
+    print(trending_tv)
 
 
 if __name__ == '__main__':
