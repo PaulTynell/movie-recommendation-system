@@ -22,10 +22,12 @@ class Requester():
 
         if self.media_type == "tv":
             shows = trending['results']
-            return [show['name'] for show in shows]
+            showresult = [show['name'] for show in shows]
+            return "\n".join(map(str, showresult))
 
         elif self.media_type == "movie":
             movies = trending['results']
-            return [movie['title'] for movie in movies]
+            movieresult = [movie['title'] for movie in movies]
+            return "\n".join(map(str, movieresult))
 
     
