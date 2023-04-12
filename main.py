@@ -1,13 +1,11 @@
 
 
-import requester
+from requester import *
 
 def main():
-
-    api = requester.Requester()
-
-    api.get_trending("movie", "day")
-
+    api = Requester()
+    results = api.get_trending("movie", "day")
+    return results
 
 if __name__ == '__main__':
-    main()
+    print(main())

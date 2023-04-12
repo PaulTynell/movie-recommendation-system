@@ -13,8 +13,7 @@ class Requester():
         self.time_window = "week"
         self.response = f"https://api.themoviedb.org/3/trending/{self.media_type}/{self.time_window}?api_key={self.api_key}"
 
-
-    def get_trending(self,media_type, time_window):
+    def get_trending(self, media_type, time_window):
         self.media_type = media_type
         self.time_window = time_window
         self.response = f"https://api.themoviedb.org/3/trending/{self.media_type}/{self.time_window}?api_key={self.api_key}"
@@ -23,12 +22,10 @@ class Requester():
 
         if self.media_type == "tv":
             shows = trending['results']
-            for show in shows:
-                print(show['name'])
+            return [show['name'] for show in shows]
 
         elif self.media_type == "movie":
             movies = trending['results']
-            for movie in movies:
-                print(movie['title'])
+            return [movie['title'] for movie in movies]
 
     
