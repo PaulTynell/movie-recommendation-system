@@ -2,12 +2,11 @@
 # Author: Heikki Jarvinen
 # Description: class used to model movies and tv shows
 
-# To-Do figure out genres
-
 class Video:
-    def __init__(self, id, release_date):
+    def __init__(self, id, release_date, genre):
         self.id = id
         self.release_date = release_date
+        self.genre = genre
 
     def set_id(self, id):
         self.id = id
@@ -22,11 +21,11 @@ class Video:
         return self.release_date
     
     def __str__(self):
-        return f"ID: {self.id}, Release date: {self.release_date}"
+        return f"ID: {self.id}, Release date: {self.release_date}, Genre: {self.genre}"
 
 class Movie(Video):
-    def __init__(self, id, release_date, title):
-        super().__init__(id, release_date)
+    def __init__(self, id, release_date, genre, title):
+        super().__init__(id, release_date, genre)
         self.title = title
 
     def set_title(self, title):
@@ -36,11 +35,11 @@ class Movie(Video):
         return self.title
     
     def __str__(self):
-        return f"Title: {self.title} ID: {self.id}, Release date: {self.release_date}"
+        return f"Title: {self.title} ID: {self.id}, Release date: {self.release_date}, Genre: {self.genre}"
     
 class Tv_show(Video):
-    def __init__(self, id, release_date, name):
-        super().__init__(id, release_date)
+    def __init__(self, id, release_date, genre, name):
+        super().__init__(id, release_date, genre)
         self.name = name
 
     def set_name(self, name):
@@ -50,4 +49,4 @@ class Tv_show(Video):
         return self.name
     
     def __str__(self):
-        return f"Name: {self.name} ID: {self.id}, Release date: {self.release_date}"
+        return f"Name: {self.name} ID: {self.id}, Release date: {self.release_date}, Genre: {self.genre}"
