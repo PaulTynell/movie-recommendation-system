@@ -4,20 +4,24 @@ import requester
 
 def print_dict(dicti: dict):
     for x, y in dicti.items():
-        print(x, y)
+        return "\n".join(map(str, x))
 
+def get_dictionary_keys(dictionary):
+    keys = ""
+    for key in dictionary.keys():
+        keys += str(key) + "\n"
+    return keys
 
-
-def main():
+def return_dict(format, time):
 
     api = requester.Requester()
 
-    trending_tv = api.get_trending("tv", "week")
+    trending_tv = api.get_trending(format, time)
     print(trending_tv)
-    print_dict(trending_tv)
-
-    print(api.tv_genres)
+    return get_dictionary_keys(trending_tv)
 
 
-if __name__ == '__main__':
-    print(main())
+def testing():
+
+    lol = return_dict("movie", "week")
+    print(lol)
