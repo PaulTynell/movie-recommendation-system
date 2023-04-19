@@ -1,4 +1,6 @@
-
+# File dict_manipulator
+# Author: Heikki Jarvinen
+# Description: functions used to manipulate dictionarys
 
 import requester
 
