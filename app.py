@@ -1,8 +1,12 @@
+# File app.py
+# Author: Heikki Jarvinen
+# Description: main ui for app
+
 import tkinter
 import tkinter.messagebox
 import customtkinter
 from recommend_testing import get_recommendation
-from main import return_dict
+from dict_manipulator import return_dict
 
 customtkinter.set_appearance_mode("System")
 customtkinter.set_default_color_theme("blue")
@@ -11,6 +15,7 @@ class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
 
+        # Initializing window
         self.title("Movie recommendation system")
         self.geometry(f"{1100}x{500}")
 
@@ -58,23 +63,23 @@ class App(customtkinter.CTk):
         self.entry_label = customtkinter.CTkLabel(self, text="Search a movie and get recommendations based on it!", font=customtkinter.CTkFont(size=20, weight="bold"))
         self.entry_label.grid(row=2, column=1, padx=20, pady=(20, 10))
 
-    def open_input_dialog_event(self):
-        dialog = customtkinter.CTkInputDialog(text="Type in a number:", title="CTkInputDialog")
-        print("CTkInputDialog:", dialog.get_input())
-
+    # Change window appearance
     def change_appearance_mode_event(self, new_appearance_mode: str):
         customtkinter.set_appearance_mode(new_appearance_mode)
 
+    # Change scaling
     def change_scaling_event(self, new_scaling: str):
         new_scaling_float = int(new_scaling.replace("%", "")) / 100
         customtkinter.set_widget_scaling(new_scaling_float)
 
+    # pressing sidebar button displays days/weeks trending tv/movie
     def sidebar_button_event(self):
         format = self.optionmenu_1.get()
         time = self.optionmenu_2.get()
         print(return_dict(format, time))
         self.textbox.insert("0.0", f"This {time}s trending {format}:\n\n" + f"{return_dict(format, time)}\n\n")
 
+    # pressing search button finds the movie and displays recommended movies
     def search_movies(self):
         movie_name = self.entry.get()
         recommendations = get_recommendation(movie_name)
