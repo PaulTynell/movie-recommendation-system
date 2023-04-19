@@ -1,6 +1,11 @@
+# File tktest
+# Author: Heikki Jarvinen, Paul Tynell
+# Description: second try at making tkinter ui
+
+
 import tkinter
 import customtkinter
-from main import return_dict
+from dict_manipulator import return_dict
 from recommend_testing import get_recommendation
 
 customtkinter.set_appearance_mode("dark")
