@@ -15,7 +15,7 @@ class App(customtkinter.CTk):
         self.geometry(f"{1100}x{500}")
 
         self.grid_columnconfigure(1, weight=1)
-        self.grid_columnconfigure((2, 3), weight=0)
+        self.grid_columnconfigure((2), weight=0)
         self.grid_rowconfigure((0, 1, 2), weight=1)
 
         # create sidebar frame with widgets
@@ -53,6 +53,10 @@ class App(customtkinter.CTk):
         # create textbox
         self.textbox = customtkinter.CTkTextbox(self, width=250)
         self.textbox.grid(row=0, column=1, padx=(20, 0), pady=(20, 0), sticky="nsew")
+
+        # create a label for main entry
+        self.entry_label = customtkinter.CTkLabel(self, text="Search a movie and get recommendations based on it!", font=customtkinter.CTkFont(size=20, weight="bold"))
+        self.entry_label.grid(row=2, column=1, padx=20, pady=(20, 10))
 
     def open_input_dialog_event(self):
         dialog = customtkinter.CTkInputDialog(text="Type in a number:", title="CTkInputDialog")
