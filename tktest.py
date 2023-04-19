@@ -6,7 +6,7 @@
 import tkinter
 import customtkinter
 from dict_manipulator import return_dict
-from recommend_testing import get_recommendation
+from recommend import get_recommendation
 
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("dark-blue")

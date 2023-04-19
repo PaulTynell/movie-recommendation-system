@@ -5,7 +5,7 @@
 import tkinter
 import tkinter.messagebox
 import customtkinter
-from recommend_testing import get_recommendation
+from recommend import get_recommendation
 from dict_manipulator import return_dict
 
 customtkinter.set_appearance_mode("System")
