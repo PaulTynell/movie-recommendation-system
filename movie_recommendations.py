@@ -83,7 +83,6 @@ def on_type(data):
             
 movie_input.observe(on_type, names='value')
 
-display(movie_input, movie_list)
 
 
 # In[44]:
@@ -206,6 +205,48 @@ rec_percentages.head(10).merge(movies, left_index=True, right_on="movieId")
 # In[71]:
 
 
+def find_similar_moviesadadadad(movie_id):
+    similar_users = ratings[(ratings["movieId"] == movie_id) & (ratings["rating"] > 4)]["userId"].unique()
+    similar_user_recs = ratings[(ratings["userId"].isin(similar_users)) & (ratings["rating"] > 4)]["movieId"]
+    
+    similar_user_recs = similar_user_recs.value_counts() / len(similar_users)
+    similar_user_recs = similar_user_recs[similar_user_recs > .10]
+    
+    all_users = ratings[(ratings["movieId"].isin(similar_user_recs.index)) & (ratings["rating"] > 4)]
+    all_users_recs = all_users["movieId"].value_counts() / len(all_users["userId"].unique())
+    
+    rec_percentages = pd.concat([similar_user_recs, all_users_recs], axis=1)
+    rec_percentages.columns = ["similar", "all"]
+    
+    rec_percentages["score"] = rec_percentages["similar"] / rec_percentages["all"]
+    
+    rec_percentages = rec_percentages.sort_values("score", ascending=False)
+    
+    return rec_percentages.head(10).merge(movies, left_index=True, right_on="movieId")[["title", "genres"]].to_string(index=False)
+
+
+def find_similar_moviesplace(movie_id):
+    similar_users = ratings[(ratings["movieId"] == movie_id) & (ratings["rating"] > 4)]["userId"].unique()
+    similar_user_recs = ratings[(ratings["userId"].isin(similar_users)) & (ratings["rating"] > 4)]["movieId"]
+    
+    similar_user_recs = similar_user_recs.value_counts() / len(similar_users)
+    similar_user_recs = similar_user_recs[similar_user_recs > .10]
+    
+    all_users = ratings[(ratings["movieId"].isin(similar_user_recs.index)) & (ratings["rating"] > 4)]
+    all_users_recs = all_users["movieId"].value_counts() / len(all_users["userId"].unique())
+    
+    rec_percentages = pd.concat([similar_user_recs, all_users_recs], axis=1)
+    rec_percentages.columns = ["similar", "all"]
+    
+    rec_percentages["score"] = rec_percentages["similar"] / rec_percentages["all"]
+    
+    rec_percentages = rec_percentages.sort_values("score", ascending=False)
+    
+    # Left-justify the title and genres strings with a width of 50 characters
+    formatted_output = rec_percentages.head(10).merge(movies, left_index=True, right_on="movieId")[["title", "genres"]].applymap(lambda x: x.ljust(50))
+    
+    return formatted_output.to_string(index=False, header=False)
+
 def find_similar_movies(movie_id):
     similar_users = ratings[(ratings["movieId"] == movie_id) & (ratings["rating"] > 4)]["userId"].unique()
     similar_user_recs = ratings[(ratings["userId"].isin(similar_users)) & (ratings["rating"] > 4)]["movieId"]
@@ -223,36 +264,12 @@ def find_similar_movies(movie_id):
     
     rec_percentages = rec_percentages.sort_values("score", ascending=False)
     
-    return rec_percentages.head(10).merge(movies, left_index=True, right_on="movieId")[["title", "genres"]]
-
-
-# In[74]:
-
-
-movie_name_input = widgets.Text(
-    value="Toy Story",
-    description="Movie Title:",
-    disabled=False
-)
-
-recommendation_list = widgets.Output()
-
-def on_type(data):
-    with recommendation_list:
-        recommendation_list.clear_output()
-        title = data["new"]
-        if len(title) > 5:
-            results = search(title)
-            movie_id = results.iloc[0]["movieId"]
-            display(find_similar_movies(movie_id))
-            
-movie_name_input.observe(on_type, names="value")
-
-display(movie_name_input, recommendation_list)
-
-
-# In[ ]:
-
+    # modify formatting of recommendation results
+    rec_text = ""
+    for title, genres, score in rec_percentages.head(10).merge(movies, left_index=True, right_on="movieId")[["title", "genres", "score"]].values:
+        rec_text += f"{title.ljust(50)}{genres.rjust(50)}\n"
+    
+    return rec_text
 
 
 
