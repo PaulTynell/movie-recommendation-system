@@ -61,4 +61,8 @@ def find_similar_movies(movie_id):
 def get_recommendation(title):
     movies = search(title)
     movie_id = movies.iloc[0]["movieId"]
-    return find_similar_movies(movie_id)
+    recommendations = find_similar_movies(movie_id)
+    if len(recommendations) < 1:
+        return "No movies found"
+    else:
+        return recommendations
