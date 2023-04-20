@@ -14,11 +14,17 @@ class Video:
     def set_release_date(self, release_date):
         self.release_date = release_date
 
+    def set_genre(self, genre):
+        self.genre = genre
+
     def get_id(self):
         return self.id
     
     def get_release_date(self):
         return self.release_date
+    
+    def get_genre(self):
+        return self.genre
     
     def __str__(self):
         return f"ID: {self.id}, Release date: {self.release_date}, Genre: {self.genre}"
