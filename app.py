@@ -2,15 +2,14 @@
 # Author: Heikki Jarvinen
 # Description: main ui for app
 
-import tkinter
-import tkinter.messagebox
 import customtkinter
-from recommend import get_recommendation
+from movie_recommender import get_recommendation
 from dict_manipulator import return_dict
 
 customtkinter.set_appearance_mode("System")
 customtkinter.set_default_color_theme("blue")
 
+# Creating a class for the app
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
@@ -76,7 +75,6 @@ class App(customtkinter.CTk):
     def sidebar_button_event(self):
         format = self.optionmenu_1.get()
         time = self.optionmenu_2.get()
-        print(return_dict(format, time))
         self.textbox.insert("0.0", f"This {time}s trending {format}:\n\n" + f"{return_dict(format, time)}\n\n")
 
     # pressing search button finds the movie and displays recommended movies
